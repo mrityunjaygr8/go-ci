@@ -28,6 +28,10 @@ func main() {
 	case "observer":
 		observerCmd.Parse(os.Args[2:])
 		fmt.Println("subcommand \"observer\"")
+		if *observerDir == "" {
+			fmt.Println("Observe directory cannot be blank")
+			os.Exit(1)
+		}
 		observer.Observe(*observerDir, *observerServer)
 	case "dispatcher":
 		dispatcherCmd.Parse(os.Args[2:])
