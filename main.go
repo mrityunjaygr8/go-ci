@@ -20,7 +20,7 @@ func main() {
 	dispatcherPort := dispatcherCmd.String("port", "8888", "port")
 
 	if len(os.Args) < 2 {
-		fmt.Println("expected the \"observer\" command")
+		fmt.Println("expected one of \"observer\", \"dispatcher\" or \"runner\" commands")
 		os.Exit(1)
 	}
 
@@ -34,7 +34,7 @@ func main() {
 		fmt.Println("subcommand \"dispatcher\"")
 		dispatcher.Dispatch(*dispatcherHost, *dispatcherPort)
 	default:
-		fmt.Println("expected the \"observer\" command")
+		fmt.Println("expected one of \"observer\", \"dispatcher\" or \"runner\" commands")
 		os.Exit(1)
 
 	}
