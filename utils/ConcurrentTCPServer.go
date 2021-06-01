@@ -18,10 +18,10 @@ func NewCTS(host, port string, handler func(net.Conn, string)) CTS {
 	return c
 }
 
-func (c *CTS) Start() {
 	ln, err := net.Listen("tcp", c.address.Host+":"+c.address.Port)
+func (c *CTS) Start() error {
 	if err != nil {
-		log.Fatal(err)
+		return err
 	}
 
 	for {
