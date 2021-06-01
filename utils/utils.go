@@ -15,6 +15,8 @@ const PONG = "pong"
 const BUF_SIZE = 2048
 const TEST_RESULTS_DIR = "test_results"
 const BUSY = "BUSY"
+const PORT_RANGE_START = 8900
+const PORT_RANGE_END = 9000
 
 func Communicate(host HP, msg string) (string, error) {
 	resp := make([]byte, BUF_SIZE)
