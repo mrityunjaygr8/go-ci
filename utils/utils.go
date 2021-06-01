@@ -4,6 +4,7 @@ import (
 	"bufio"
 	"fmt"
 	"net"
+	"strings"
 )
 
 const OK = "ok"
@@ -50,4 +51,9 @@ type HP struct {
 
 func (h HP) to_address() string {
 	return h.Host + ":" + h.Port
+}
+
+func HPFromString(hp string) HP {
+	res := strings.Split(hp, ":")
+	return HP{Host: res[0], Port: res[1]}
 }
