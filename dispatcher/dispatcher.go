@@ -73,8 +73,7 @@ func (d *Dispatcher) handleDispatcher(conn net.Conn, message string) {
 		conn.Write([]byte(utils.OK))
 
 	default:
-		fmt.Println(command)
-		conn.Write([]byte(utils.OK))
+		conn.Write([]byte(utils.INVALID_COMMAND))
 	}
 }
 
