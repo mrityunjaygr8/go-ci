@@ -9,8 +9,9 @@ import (
 )
 
 type CTS struct {
-	Handler func(net.Conn, string)
-	address HP
+	Handler  func(net.Conn, string)
+	address  HP
+	listener net.Listener
 }
 
 func NewCTS(host, port string, handler func(net.Conn, string)) CTS {
@@ -18,12 +19,30 @@ func NewCTS(host, port string, handler func(net.Conn, string)) CTS {
 	return c
 }
 
-func (c *CTS) Start() error {
-	fmt.Println("Listening on ", c.address.to_address())
-	ln, err := net.Listen("tcp", c.address.to_address())
+func (c *CTS) Address() string {
+	return c.address.to_address()
+}
+
+func (c *CTS) Test() error {
+	ln, err := net.Listen("tcp", c.Address())
 	if err != nil {
 		return err
 	}
+	if ln != nil {
+		ln.Close()
+	}
+	return nil
+}
+
+func (c *CTS) Start() {
+	fmt.Println("Listening on ", c.Address())
+	ln, err := net.Listen("tcp", c.Address())
+	if err != nil {
+		fmt.Println("An error has occurred")
+		log.Fatal(err)
+	}
+
+	c.listener = ln
 
 	for {
 		conn, err := ln.Accept()
@@ -37,6 +56,7 @@ func (c *CTS) Start() error {
 
 func (c *CTS) Stop() {
 	fmt.Println("Exiting")
+	c.listener.Close()
 
 }
 
