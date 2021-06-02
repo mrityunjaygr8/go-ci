@@ -49,7 +49,7 @@ func (r *runner) handleRunner(conn net.Conn, message string) {
 				conn.Write([]byte(fmt.Sprintf("An error has occurred, %s", &stdout)))
 			} else {
 				fmt.Println("Output ", &stdout)
-				_, err := utils.Communicate(r.dispatcher, fmt.Sprintf("results:%d:%s", stdout.Len()+1, stdout.String()))
+				_, err := utils.Communicate(r.dispatcher, fmt.Sprintf("results:%s:%d:%s", commit_id, stdout.Len()+1, stdout.String()))
 				if err != nil {
 					fmt.Println("An error has occerred ", err)
 				}
